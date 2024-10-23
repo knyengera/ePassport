@@ -87,5 +87,33 @@ namespace PassportX
         {
 
         }
+
+        private void Button_MouseEnter(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                btn.BackColor = Color.FromArgb(46, 51, 73);
+            }
+        }
+
+        private void Button_MouseLeave(object sender, EventArgs e)
+        {
+            if (sender is Button btn)
+            {
+                btn.BackColor = Color.Transparent;
+            }
+        }
+
+        private void AttachHoverEvents()
+        {
+            foreach (Control control in pnlNavigation.Controls)
+            {
+                if (control is Button btn)
+                {
+                    btn.MouseEnter += Button_MouseEnter;
+                    btn.MouseLeave += Button_MouseLeave;
+                }
+            }
+        }
     }
 }

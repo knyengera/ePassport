@@ -39,6 +39,8 @@
             pnlSessionInfo = new Panel();
             btnLogout = new Button();
             lblSessionInfo = new Label();
+            pnlContent = new Panel();
+            
             pnlNavigation.SuspendLayout();
             pnlSessionInfo.SuspendLayout();
             SuspendLayout();
@@ -56,7 +58,7 @@
             // 
             // pnlNavigation
             // 
-            pnlNavigation.BackColor = Color.LightGray;
+            pnlNavigation.BackColor = Color.FromArgb(24, 30, 54);
             pnlNavigation.Controls.Clear();
             pnlNavigation.Controls.Add(btnApplicantSearch);
             pnlNavigation.Controls.Add(btnApplicantDetails);
@@ -66,11 +68,10 @@
             pnlNavigation.Controls.Add(btnSettings);
             pnlNavigation.Dock = DockStyle.Left;
             pnlNavigation.Location = new Point(0, 0);
-            pnlNavigation.Margin = new Padding(4, 5, 4, 5);
             pnlNavigation.Name = "pnlNavigation";
-            pnlNavigation.Size = new Size(267, 692);
+            pnlNavigation.Size = new Size(230, 720);
             pnlNavigation.TabIndex = 1;
-            pnlNavigation.Padding = new Padding(16, 91, 16, 16);
+            pnlNavigation.Padding = new Padding(10, 60, 10, 10);
             // 
             // btnSettings
             // 
@@ -147,27 +148,27 @@
             // 
             // pnlSessionInfo
             // 
-            pnlSessionInfo.BackColor = Color.LightSlateGray;
+            pnlSessionInfo.BackColor = Color.FromArgb(24, 30, 54);
             pnlSessionInfo.Controls.Clear();
             pnlSessionInfo.Controls.Add(btnLogout);
             pnlSessionInfo.Controls.Add(lblSessionInfo);
             pnlSessionInfo.Dock = DockStyle.Top;
+            pnlSessionInfo.Height = 60;
             pnlSessionInfo.Padding = new Padding(10);
-            pnlSessionInfo.Height = 50;
 
-            // Modify btnLogout
-            btnLogout.Anchor = AnchorStyles.Right | AnchorStyles.Top | AnchorStyles.Bottom;
-            btnLogout.Dock = DockStyle.Right;
-            btnLogout.AutoSize = true;
-            btnLogout.Height = pnlSessionInfo.Height - 10;
-            btnLogout.Location = new Point(pnlSessionInfo.Width - btnLogout.Width - 10, 5);
+            btnLogout.Anchor = AnchorStyles.Right;
+            btnLogout.FlatStyle = FlatStyle.Flat;
+            btnLogout.FlatAppearance.BorderSize = 0;
+            btnLogout.Font = new Font("Nirmala UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btnLogout.ForeColor = Color.FromArgb(0, 126, 249);
+            btnLogout.Text = "Logout";
+            btnLogout.Size = new Size(100, 40);
+            btnLogout.Location = new Point(pnlSessionInfo.Width - btnLogout.Width - 10, 10);
 
-            // Modify lblSessionInfo
             lblSessionInfo.AutoSize = true;
-            lblSessionInfo.Anchor = AnchorStyles.Right;
-            lblSessionInfo.TextAlign = ContentAlignment.MiddleRight;
-            lblSessionInfo.Dock = DockStyle.None;
-            lblSessionInfo.Location = new Point(pnlSessionInfo.Width - btnLogout.Width - lblSessionInfo.Width - 20, (pnlSessionInfo.Height - lblSessionInfo.Height) / 2);
+            lblSessionInfo.Font = new Font("Nirmala UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            lblSessionInfo.ForeColor = Color.FromArgb(0, 126, 249);
+            lblSessionInfo.Location = new Point(10, 20);
 
             // Add a Resize event handler to pnlSessionInfo to keep the layout correct when resizing
             pnlSessionInfo.Resize += (sender, e) => UpdateSessionInfoLayout();
@@ -194,17 +195,25 @@
             lblSessionInfo.TabIndex = 0;
             lblSessionInfo.Text = "Logged in as: ";
             // 
+            // pnlContent
+            // 
+            pnlContent.Dock = DockStyle.Fill;
+            
+            // 
             // Dashboard
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
-            AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1272, 692);
-            Controls.Add(pnlSessionInfo);
-            Controls.Add(pnlNavigation);
-            Controls.Add(lblWelcome);
-            Margin = new Padding(4, 5, 4, 5);
-            Name = "Dashboard";
-            Text = "Dashboard";
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
+            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.ClientSize = new System.Drawing.Size(1280, 720);
+            this.Controls.Add(pnlSessionInfo);
+            this.Controls.Add(pnlNavigation);
+            this.Controls.Add(pnlContent);
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.Sizable;
+            this.MinimumSize = new System.Drawing.Size(800, 600);
+            this.Name = "Dashboard";
+            this.Text = "Dashboard";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+            this.WindowState = System.Windows.Forms.FormWindowState.Normal;
             pnlNavigation.ResumeLayout(false);
             pnlSessionInfo.ResumeLayout(false);
             pnlSessionInfo.PerformLayout();
@@ -234,12 +243,29 @@
         private System.Windows.Forms.Button btnApplicantDetails;
         private System.Windows.Forms.Button btnFingerprintCapture;
         private System.Windows.Forms.Button btnBiometricReview;
+        private System.Windows.Forms.Panel pnlContent;
 
         // Add this method to the Dashboard class
         private void UpdateSessionInfoLayout()
         {
             btnLogout.Location = new Point(pnlSessionInfo.Width - btnLogout.Width - 10, (pnlSessionInfo.Height - btnLogout.Height) / 2);
             lblSessionInfo.Location = new Point(pnlSessionInfo.Width - btnLogout.Width - lblSessionInfo.Width - 20, (pnlSessionInfo.Height - lblSessionInfo.Height) / 2);
+        }
+
+        private void StyleButton(Button btn, string iconName)
+        {
+            btn.FlatStyle = FlatStyle.Flat;
+            btn.FlatAppearance.BorderSize = 0;
+            btn.Font = new Font("Nirmala UI", 10F, FontStyle.Bold, GraphicsUnit.Point);
+            btn.ForeColor = Color.FromArgb(0, 126, 249);
+            btn.Image = Image.FromFile($"icons/{iconName}.png");
+            btn.ImageAlign = ContentAlignment.MiddleLeft;
+            btn.Padding = new Padding(10, 0, 0, 0);
+            btn.TextAlign = ContentAlignment.MiddleLeft;
+            btn.TextImageRelation = TextImageRelation.ImageBeforeText;
+            btn.Size = new Size(210, 45);
+            btn.Dock = DockStyle.Top;
+            btn.Margin = new Padding(0, 0, 0, 10);
         }
     }
 }
