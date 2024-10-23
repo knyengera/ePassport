@@ -1,4 +1,5 @@
 using System;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace PassportX
@@ -8,6 +9,7 @@ namespace PassportX
         public Form1()
         {
             InitializeComponent();
+            this.FormClosing += Form1_FormClosing;
         }
 
         private void btnLogin_Click(object sender, EventArgs e)
@@ -42,6 +44,17 @@ namespace PassportX
                     MessageBox.Show("Invalid username or password.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 }
             }
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
+        }
+
+        protected override void OnPaint(PaintEventArgs e)
+        {
+            base.OnPaint(e);
+            ControlPaint.DrawBorder(e.Graphics, ClientRectangle, Color.FromArgb(0, 122, 204), ButtonBorderStyle.Solid);
         }
     }
 }
