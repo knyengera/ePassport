@@ -48,7 +48,7 @@ namespace PassportX
             using (SolidBrush lightGrayBrush = new SolidBrush(Color.FromArgb(200, 255, 255, 255)))
             {
                 g.DrawString("PassportX", new Font("Arial", 24, FontStyle.Bold), lightGrayBrush, new PointF(40, 50));
-                g.DrawString("v1.0.0", new Font("Arial", 12), lightGrayBrush, new PointF(50, 95));
+                g.DrawString("v1.0.0", new Font("Arial", 10, FontStyle.Italic), lightGrayBrush, new PointF(50, 95));
             }
 
             // Draw additional text
